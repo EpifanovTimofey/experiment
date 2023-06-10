@@ -1,12 +1,14 @@
-import shar
+import random
 
-b = 1
-c = shar.Shar(100, 100, 100)
-c.pluspat()
-c.plus(13)
-f = shar.Shar(200, 600, 400)
-f.pluspat()
-f.pluspat()
-print(c)
+import shar
+kkk = 0
+b = []
+while kkk != 100:
+    r1 = random.randint(50,100)
+    c = shar.Shar(r1, 200, 100)
+    b.append(c)
+    kkk += 1
+
 def go():
-    f.go()
+    for s in b:
+        s.go()

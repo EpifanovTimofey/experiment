@@ -1,12 +1,13 @@
-import pygame, model
+import pygame
 
-dis = pygame.display.set_mode([800, 600])
+dis = pygame.display.set_mode([0,0],pygame.FULLSCREEN)
 
+import model
 
 def jjj():
     dis.fill([0, 0, 0])
-    model.c.draw(dis)
-    model.f.draw(dis)
+    for s in model.b:
+        s.draw(dis)
     pygame.display.flip()
 
 
