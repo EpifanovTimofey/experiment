@@ -1,8 +1,11 @@
 import random
-
 import shar
-kkk = 0
 b = []
+jjjj = shar.Shar(100,800,800)
+jjjj.go()
+shar.Shar.go(jjjj)
+exit()
+kkk = 0
 while kkk != 100:
     r1 = random.randint(50,100)
     c = shar.Shar(r1, 200, 100)

@@ -45,3 +45,8 @@ class Shar:
             self.b2 += self.speed_y
             if display.get_height() - self.a <= self.b2:
                 self.y = 1
+
+    def ggg(self):
+        k = 1
+        k += k
+        self.append(k)
