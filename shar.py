@@ -1,9 +1,10 @@
-import pygame, random
+import pygame, random, math
 
 display = pygame.display.get_surface()
 
+
 class Shar:
-    def __init__(self, chislo, koordinat1, koordinat2):
+    def __init__(self, chislo, koordinat1, koordinat2, main):
         self.a = chislo
         self.b1 = koordinat1
         self.b2 = koordinat2
@@ -14,6 +15,8 @@ class Shar:
         self.y = 1
         self.speed_x = random.randint(1, 10)
         self.speed_y = random.randint(1, 10)
+        self.obvodka = False
+        self.main = main
 
     def pluspat(self):
         self.a += 5
@@ -22,8 +25,12 @@ class Shar:
         self.a += chislo
 
     def draw(self, ekran):
+        if self.main != None:
+            pygame.draw.line(ekran, [0, 0, 0], [self.b1, self.b2], [self.main.b1, self.main.b2])
         pygame.draw.circle(ekran, [self.l1, self.l2, self.l3], [self.b1, self.b2], self.a)
-        pygame.draw.circle(ekran, [0, 0, 0], [self.b1, self.b2], (self.speed_y+self.speed_x)/2)
+        pygame.draw.circle(ekran, [0, 0, 0], [self.b1, self.b2], (self.speed_y + self.speed_x) / 2)
+        if self.obvodka:
+            pygame.draw.circle(ekran, [0, 0, 0], [self.b1, self.b2], self.a, 5)
 
     def go(self):
         if self.x == 1:
@@ -45,8 +52,21 @@ class Shar:
             self.b2 += self.speed_y
             if display.get_height() - self.a <= self.b2:
                 self.y = 1
+        self.a += 1
+        if self.a == 101:
+            self.a = 10
 
-    def ggg(self):
-        k = 1
-        k += k
-        self.append(k)
+    def events(self, p1):
+        for p2 in p1:
+            if p2.type == pygame.KEYDOWN and p2.key == pygame.K_SPACE:
+                self.l1 = random.randint(0, 255)
+                self.l2 = random.randint(0, 255)
+                self.l3 = random.randint(0, 255)
+            if p2.type == pygame.MOUSEBUTTONDOWN and p2.button == pygame.BUTTON_LEFT:
+                if math.dist(p2.pos, [self.b1, self.b2]) <= self.a:
+                    self.speed_y += 1
+                    self.speed_x += 1
+        if math.dist(pygame.mouse.get_pos(), [self.b1, self.b2]) <= self.a:
+            self.obvodka = True
+        else:
+            self.obvodka = False
