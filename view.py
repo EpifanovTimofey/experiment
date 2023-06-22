@@ -8,6 +8,7 @@ def jjj():
     dis.fill([255, 255, 255])
     for s in model.b:
         s.draw(dis)
+
     pygame.display.flip()
 
 
