@@ -19,6 +19,7 @@ class Shar:
         self.red_obvodka = False
         self.main = main
         self.spisok_shar = spisok_shar
+        self.rastoanie = 1000
 
     def pluspat(self):
         self.a += 5
@@ -63,8 +64,15 @@ class Shar:
             self.a = 10
 
         for s in self.spisok_shar:
+            a = math.dist([self.b1, self.b2], [s.b1, s.b2])
             if s is not self:
-                self.kosanie(s)
+                self.rastoanie = a
+                print(self.rastoanie)
+                # if a <= self.a + s.a:
+                #     self.red_obvodka = True
+                # else:
+                #     self.red_obvodka = False
+
 
     def events(self, p1):
         for p2 in p1:
@@ -80,10 +88,3 @@ class Shar:
             self.obvodka = True
         else:
             self.obvodka = False
-
-    def kosanie(self, s):
-        a = math.dist([self.b1, self.b2], [s.b1, s.b2])
-        if a <= self.a + s.a:
-            self.red_obvodka = True
-        # else:
-        #     self.red_obvodka = False

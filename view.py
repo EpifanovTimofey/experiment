@@ -1,6 +1,6 @@
 import pygame
 
-dis = pygame.display.set_mode([0,0],pygame.FULLSCREEN)
+dis = pygame.display.set_mode([600,600])
 
 import model
 
