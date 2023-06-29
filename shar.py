@@ -19,7 +19,7 @@ class Shar:
         self.red_obvodka = False
         self.main = main
         self.spisok_shar = spisok_shar
-        self.rastoanie = 1000
+        # self.rastoanie = 1000
 
     def pluspat(self):
         self.a += 5
@@ -63,15 +63,30 @@ class Shar:
         if self.a == 101:
             self.a = 10
 
+        self.blizh_shar = self.spisok_shar[0]
+        if self.spisok_shar[0] is self:
+            self.blizh_shar = self.spisok_shar[1]
+
         for s in self.spisok_shar:
-            a = math.dist([self.b1, self.b2], [s.b1, s.b2])
+            a1 = math.dist([self.b1, self.b2], [s.b1, s.b2])
+            a2 = math.dist([self.b1, self.b2], [self.blizh_shar.b1, self.blizh_shar.b2])
             if s is not self:
-                self.rastoanie = a
-                print(self.rastoanie)
+                if a1 < a2:
+                    self.blizh_shar = s
+        a2 = math.dist([self.b1, self.b2], [self.blizh_shar.b1, self.blizh_shar.b2])
+        if a2 < self.blizh_shar.a + self.a:
+            self.red_obvodka = True
+        else:
+            self.red_obvodka = False
+                # self.rastoanie = a
+                # print(self.rastoanie)
                 # if a <= self.a + s.a:
                 #     self.red_obvodka = True
                 # else:
                 #     self.red_obvodka = False
+    # if оно гнилое:
+    #   вкл красный: true
+    #
 
 
     def events(self, p1):
