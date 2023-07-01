@@ -6,7 +6,7 @@ r1 = random.randint(10, 100)
 main = shar.Shar(r1, 500, 500, None, b)
 b.append(main)
 kkk = 0
-while kkk != 50:
+while kkk != 29:
     r1 = random.randint(10,100)
     x1 = random.randint(100, display.get_width()-100)
     y1 = random.randint(100, display.get_height()-100)

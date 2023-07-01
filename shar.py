@@ -28,15 +28,13 @@ class Shar:
         self.a += chislo
 
     def draw(self, ekran):
-        if self.main != None:
-            pygame.draw.line(ekran, [0, 0, 0], [self.b1, self.b2], [self.main.b1, self.main.b2])
-        pygame.draw.circle(ekran, [self.l1, self.l2, self.l3], [self.b1, self.b2], self.a)
-        pygame.draw.circle(ekran, [0, 0, 0], [self.b1, self.b2], (self.speed_y + self.speed_x) / 2)
+        # pygame.draw.circle(ekran, [self.l1, self.l2, self.l3], [self.b1, self.b2], self.a, 5)
+        # pygame.draw.circle(ekran, [0, 0, 0], [self.b1, self.b2], (self.speed_y + self.speed_x) / 2)
+        pygame.draw.polygon(ekran, [self.l1, self.l2, self.l3], [[self.b1, self.b2 - self.a], [self.b1 - self.a, self.b2], [self.b1, self.b2 + self.a], [self.b1 + self.a, self.b2]], 5)
         if self.obvodka:
             pygame.draw.circle(ekran, [0, 0, 0], [self.b1, self.b2], self.a, 5)
-        if self.red_obvodka:
-            pygame.draw.circle(ekran, [255, 0, 0], [self.b1, self.b2], self.a, 5)
-
+        # if self.main == None:
+        #     pygame.draw.circle(ekran, [255, 0, 0], [self.b1, self.b2], self.a, 5)
 
     def go(self):
         if self.x == 1:
@@ -58,36 +56,31 @@ class Shar:
             self.b2 += self.speed_y
             if display.get_height() - self.a <= self.b2:
                 self.y = 1
+        self.a = 100
 
-        self.a += 1
-        if self.a == 101:
-            self.a = 10
-
-        self.blizh_shar = self.spisok_shar[0]
-        if self.spisok_shar[0] is self:
-            self.blizh_shar = self.spisok_shar[1]
-
+        # self.blizh_shar = self.spisok_shar[0]
+        # if self.spisok_shar[0] is self:
+        #     self.blizh_shar = self.spisok_shar[1]
+        #
+        # for s in self.spisok_shar:
+        #     a1 = math.dist([self.b1, self.b2], [s.b1, s.b2])
+        #     a2 = math.dist([self.b1, self.b2], [self.blizh_shar.b1, self.blizh_shar.b2])
+        #     if s is not self:
+        #         if a1 < a2:
+        #             self.blizh_shar = s
+        # a2 = math.dist([self.b1, self.b2], [self.blizh_shar.b1, self.blizh_shar.b2])
+        # if a2 < self.blizh_shar.a + self.a:
+        #     self.red_obvodka = True
+        # else:
+        #     self.red_obvodka = False
         for s in self.spisok_shar:
+            if s is self:
+                continue
             a1 = math.dist([self.b1, self.b2], [s.b1, s.b2])
-            a2 = math.dist([self.b1, self.b2], [self.blizh_shar.b1, self.blizh_shar.b2])
-            if s is not self:
-                if a1 < a2:
-                    self.blizh_shar = s
-        a2 = math.dist([self.b1, self.b2], [self.blizh_shar.b1, self.blizh_shar.b2])
-        if a2 < self.blizh_shar.a + self.a:
-            self.red_obvodka = True
-        else:
-            self.red_obvodka = False
-                # self.rastoanie = a
-                # print(self.rastoanie)
-                # if a <= self.a + s.a:
-                #     self.red_obvodka = True
-                # else:
-                #     self.red_obvodka = False
-    # if оно гнилое:
-    #   вкл красный: true
-    #
-
+            if a1 <= s.a + self.a:
+                self.a = a1 - s.a
+                if self.a < 0:
+                    self.a = 0
 
     def events(self, p1):
         for p2 in p1:
