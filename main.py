@@ -5,5 +5,5 @@ import time
 while True:
     time.sleep(1/60)
     control.p()
-    model.go()
+    model.go1()
     view.jjj()

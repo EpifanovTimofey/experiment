@@ -19,6 +19,7 @@ class Shar:
         self.red_obvodka = False
         self.main = main
         self.spisok_shar = spisok_shar
+        self.figura = random.choice(["krug", "romb"])
         # self.rastoanie = 1000
 
     def pluspat(self):
@@ -28,33 +29,42 @@ class Shar:
         self.a += chislo
 
     def draw(self, ekran):
-        # pygame.draw.circle(ekran, [self.l1, self.l2, self.l3], [self.b1, self.b2], self.a, 5)
-        # pygame.draw.circle(ekran, [0, 0, 0], [self.b1, self.b2], (self.speed_y + self.speed_x) / 2)
-        pygame.draw.polygon(ekran, [self.l1, self.l2, self.l3], [[self.b1, self.b2 - self.a], [self.b1 - self.a, self.b2], [self.b1, self.b2 + self.a], [self.b1 + self.a, self.b2]], 5)
+        if self.figura == "krug":
+            pygame.draw.circle(ekran, [self.l1, self.l2, self.l3], [self.b1, self.b2], self.a, 5)
+            pygame.draw.circle(ekran, [0, 0, 0], [self.b1, self.b2], (self.speed_y + self.speed_x) / 2)
+        if self.figura == "romb":
+            pygame.draw.polygon(ekran, [self.l1, self.l2, self.l3],
+                                [[self.b1, self.b2 - self.a], [self.b1 - self.a, self.b2], [self.b1, self.b2 + self.a],
+                                 [self.b1 + self.a, self.b2]], 5)
+            pygame.draw.polygon(ekran, [0, 0, 0],
+                                [[self.b1, self.b2 - self.speed_y], [self.b1 - self.speed_x, self.b2],
+                                 [self.b1, self.b2 + self.speed_y],
+                                 [self.b1 + self.speed_x, self.b2]])
         if self.obvodka:
             pygame.draw.circle(ekran, [0, 0, 0], [self.b1, self.b2], self.a, 5)
+
         # if self.main == None:
         #     pygame.draw.circle(ekran, [255, 0, 0], [self.b1, self.b2], self.a, 5)
 
     def go(self):
         if self.x == 1:
             self.b1 -= self.speed_x
-            if 0 + self.a >= self.b1:
+            if 200 + self.a >= self.b1:
                 self.x = 0
 
         elif self.x == 0:
             self.b1 += self.speed_x
-            if display.get_width() - self.a <= self.b1:
+            if 500 - self.a <= self.b1:
                 self.x = 1
 
         if self.y == 1:
             self.b2 -= self.speed_y
-            if 0 + self.a >= self.b2:
+            if 200 + self.a >= self.b2:
                 self.y = 0
 
         elif self.y == 0:
             self.b2 += self.speed_y
-            if display.get_height() - self.a <= self.b2:
+            if 500 - self.a <= self.b2:
                 self.y = 1
         self.a = 100
 
