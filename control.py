@@ -5,6 +5,6 @@ def p():
     for f in p1:
         if f.type == pygame.QUIT:
             exit()
-    # for s in model.b:
-    #     s.events(p1)
+    model.st.control(p1)
+    model.st2.control(p1)
 

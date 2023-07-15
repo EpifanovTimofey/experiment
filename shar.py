@@ -4,7 +4,7 @@ display = pygame.display.get_surface()
 
 
 class Shar:
-    def __init__(self, chislo, koordinat1, koordinat2, main, spisok_shar):
+    def __init__(self, chislo, koordinat1, koordinat2, main, spisok_shar, figura):
         self.a = chislo
         self.b1 = koordinat1
         self.b2 = koordinat2
@@ -19,8 +19,7 @@ class Shar:
         self.red_obvodka = False
         self.main = main
         self.spisok_shar = spisok_shar
-        self.figura = random.choice(["krug", "romb"])
-        # self.rastoanie = 1000
+        self.figura = figura
 
     def pluspat(self):
         self.a += 5
@@ -46,25 +45,25 @@ class Shar:
         # if self.main == None:
         #     pygame.draw.circle(ekran, [255, 0, 0], [self.b1, self.b2], self.a, 5)
 
-    def go(self):
+    def go(self, lev, prav, verh, niz):
         if self.x == 1:
             self.b1 -= self.speed_x
-            if 200 + self.a >= self.b1:
+            if lev + self.a >= self.b1:
                 self.x = 0
 
         elif self.x == 0:
             self.b1 += self.speed_x
-            if 500 - self.a <= self.b1:
+            if prav - self.a <= self.b1:
                 self.x = 1
 
         if self.y == 1:
             self.b2 -= self.speed_y
-            if 200 + self.a >= self.b2:
+            if verh + self.a >= self.b2:
                 self.y = 0
 
         elif self.y == 0:
             self.b2 += self.speed_y
-            if 500 - self.a <= self.b2:
+            if niz - self.a <= self.b2:
                 self.y = 1
         self.a = 100
 
